@@ -10,5 +10,9 @@ ANON Validator is a tool that can read your .anon files and validate them for er
 2. In the root of the project, run `npm i` to install the dependencies.
 3. In the root of the project, run `node index <path_to_file>/file_name.anon` (Eg: `node index test.anon`).
 
+# Test execution
+After cloning the repository and installing the dependencies, run `npm test` to execute the unit tests.
+
 # Screenshot
 <img src="./screenshots/output.jpg" align="center">
+<img src="./screenshots/test-output.jpg" align="center">
