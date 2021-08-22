@@ -42,6 +42,11 @@ const validateFile = () => {
 
 try {
     const content = validateFile();
+
+    if (content.length === 0) {
+        throw new FileError(_.EMPTY_FILE);
+    }
+
     validateAnon(content);
     printSuccess(_.NO_ERROR);
 } catch (e) {
