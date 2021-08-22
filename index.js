@@ -23,12 +23,14 @@ const validateAnon = (content) => {
 * @return   {String}        File content
 */
 const validateFile = () => {
+    //Check if file provided as argument
     if (process.argv.length < 3) {
         throw new FileError(_.NO_FILE_PROVIDED);
     }
 
     const filePath = process.argv.slice(2)[0];
 
+    //Check if file format is .anon
     if (filePath.split(".").pop() !== "anon") {
         throw new FileError(_.INCORRECT_FILE_FORMAT);
     }
@@ -43,6 +45,7 @@ const validateFile = () => {
 try {
     const content = validateFile();
 
+    //Check if file is empty
     if (content.length === 0) {
         throw new FileError(_.EMPTY_FILE);
     }

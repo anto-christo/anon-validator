@@ -9,16 +9,23 @@ const _ = require('../utils/message');
  * @returns Current Position in file
  */
 const jumpSpaces = (content, i)=> {
+    i++;
     const spaceChars = [' ', ...EOL];
+
+    //Skip spaces
     while (spaceChars.some(el => el === content[i])) {
         i++;
     }
+
+    //Skip comments till end of line
     if (content[i] === '/' && content[i+1] === '/') {
         while (content.substring(i, i + EOL.length) !== EOL) {
             i++;
         }
-        i = jumpSpaces(content, i);
+        i = jumpSpaces(content, --i);
     }
+
+    //Check if not exceeding beyond file content
     if (i >= content.length) {
         throw new ValidationError({
             content,
@@ -27,6 +34,7 @@ const jumpSpaces = (content, i)=> {
             position: i
         });
     }
+    
     return i;
 }
 

@@ -7,10 +7,13 @@
 const validateNull = (content, i) => {
     if (content[i] === "n") {
         let slicedContent = content.substring(i, i + 4);
+
+        //Check if value is null
         if (slicedContent === 'null') {
             return i += 3;
         }
     }
+
     return i;
 }
 

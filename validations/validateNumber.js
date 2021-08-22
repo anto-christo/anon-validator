@@ -8,6 +8,7 @@ const validateNumber = (content, i) => {
     while (content[i] >= "0" && content[i] <= "9") {
         i++;
     }
+    
     return --i;
 }
 

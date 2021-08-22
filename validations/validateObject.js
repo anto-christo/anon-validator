@@ -32,23 +32,27 @@ const checkInitialCharacter = (content, i) => {
 const validateObject = (content, i = 0) => {
     checkInitialCharacter(content, i);
     
-    i = jumpSpaces(content, ++i);
+    i = jumpSpaces(content, i);
 
     let newObject = true;
 
+    //Loop till closing brace is found
     while (content[i] !== '}') {
+
+        //Check for non-first key-values
         if (!newObject) {
             i = validateComma(content, i);
-            i = jumpSpaces(content, ++i);
+            i = jumpSpaces(content, i);
 
             if (content[i] === "}") {
                 continue;
             }
         }
 
+        //Check keys
         if (content[i] === '"') {
-            i = validateString(content, ++i);
-            i = jumpSpaces(content, ++i);
+            i = validateString(content, i);
+            i = jumpSpaces(content, i);
         } else {
             throw new ValidationError({
                 content,
@@ -58,10 +62,11 @@ const validateObject = (content, i = 0) => {
             });
         }
 
+        //Check values
         if (content[i] === ':') {
-            i = jumpSpaces(content, ++i);
+            i = jumpSpaces(content, i);
             i = validateValue(content, i);
-            i = jumpSpaces(content, ++i);
+            i = jumpSpaces(content, i);
 
             newObject = false;
         } else {
@@ -73,6 +78,7 @@ const validateObject = (content, i = 0) => {
             });
         }
 
+        //Check if not exceeding beyond file content
         if (i >= content.length) {
             throw new ValidationError({
                 content,
@@ -82,6 +88,7 @@ const validateObject = (content, i = 0) => {
             });
         }
     }
+
     return i;
 }
 
@@ -92,13 +99,16 @@ const validateObject = (content, i = 0) => {
  * @returns Current position in file
  */
  const validateArray = (content, i) => {
-    i = jumpSpaces(content, ++i);
+    i++;
+    i = jumpSpaces(content, i);
 
     let newArray = true;
+
+    //Loop till square closing bracket is found
     while (content[i] !== ']') {
         if (!newArray) {
             i = validateComma(content, i);
-            i = jumpSpaces(content, ++i);
+            i = jumpSpaces(content, i);
 
             if (content[i] === "]") {
                 continue;
@@ -106,9 +116,10 @@ const validateObject = (content, i = 0) => {
         }
 
         i = validateValue(content, i);
-        i = jumpSpaces(content, ++i);
+        i = jumpSpaces(content, i);
         newArray = false;
 
+        //Check if not exceeding beyond file content
         if (i >= content.length) {
             throw new ValidationError({
                 content,
@@ -118,6 +129,7 @@ const validateObject = (content, i = 0) => {
             });
         }
     }
+
     return i;
 }
 
@@ -128,12 +140,13 @@ const validateObject = (content, i = 0) => {
  * @returns Current position in file
  */
 const validateValue = (content, i) => {
+    //Check for different value types
     if (content[i] === '{') {
         i = validateObject(content, i);
     } else if (content[i] === '"') {
-        i = validateString(content, ++i, true);
+        i = validateString(content, i, true);
     } else if (content[i] === '[') {
-        i = validateArray(content, ++i);
+        i = validateArray(content, i);
     } else if (content[i] >= "0" && content[i] <= "9") {
         i = validateNumber(content, i);
     } else {
@@ -148,6 +161,7 @@ const validateValue = (content, i) => {
             });
         }
     }
+
     return i;
 }
 

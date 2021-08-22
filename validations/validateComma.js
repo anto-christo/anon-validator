@@ -16,6 +16,7 @@ const validateComma = (content, i)=> {
             position: i
         });
     }
+    
     return i;
 }
 
