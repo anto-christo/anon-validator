@@ -6,7 +6,7 @@
  */
 const validateNull = (content, i) => {
     if (content[i] === "n") {
-        let slicedContent = content.substring(i, i + 4);
+        const slicedContent = content.substring(i, i + 4);
 
         //Skip and dont throw error if value is null
         if (slicedContent === 'null') {

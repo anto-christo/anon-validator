@@ -8,9 +8,9 @@ const chalk = require('chalk');
  * @returns 
  */
 const getErrorLineInfo = (content, position) => {
-    let tillPosition = content.substring(0, position + 1).split(EOL);
-    let lineNumber = tillPosition.length - 1;
-    let line = content.split(EOL)[lineNumber];
+    const tillPosition = content.substring(0, position + 1).split(EOL);
+    const lineNumber = tillPosition.length - 1;
+    const line = content.split(EOL)[lineNumber];
     tillPosition.pop()
     return {
         line,

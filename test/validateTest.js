@@ -69,6 +69,21 @@ describe('Validate ANON', function() {
         } 
     });
 
+    it('should support integers as values', function() {
+        const content = '{ "name" : 123 }';
+        assert.strictEqual(validateAnon(content), true); 
+    });
+
+    it('should support null as values', function() {
+        const content = '{ "name" : null }';
+        assert.strictEqual(validateAnon(content), true); 
+    });
+
+    it('should support boolean as values', function() {
+        const content = '{ "name" : true }';
+        assert.strictEqual(validateAnon(content), true); 
+    });
+
     it('should support triple quotes for values', function() {
         const content = '{ "name" : """xyz""" }';
         assert.strictEqual(validateAnon(content), true); 
