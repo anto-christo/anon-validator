@@ -34,7 +34,6 @@ const printTitle = () => {
  * @param {Object} errorInfo 
  */
 const output = (errorObject, errorInfo) => {
-    printTitle();
     log(chalk.redBright(`${errorObject.type}: ${errorObject.message}`));
     log(chalk.redBright(`Line: ${errorInfo.lineNumber}; Position: ${errorInfo.position}${EOL}`));
     log(chalk.whiteBright(`--> ${errorInfo.line}${EOL}`));
