@@ -12,7 +12,7 @@ const validateComma = (content, i)=> {
         throw new ValidationError({
             content,
             message: _.MISSING_CHARACTER,
-            expected: ',',
+            expected: ', before this key-value pair',
             position: i
         });
     }
