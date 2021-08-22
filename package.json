@@ -1,0 +1,14 @@
+{
+  "name": "anon-validator",
+  "version": "1.0.0",
+  "description": "Validator for ANON configuration file",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Anto Christopher",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2"
+  }
+}
