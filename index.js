@@ -55,3 +55,7 @@ try {
 } catch (e) {
     printError(e);
 }
+
+module.exports = {
+    validateAnon
+}

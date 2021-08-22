@@ -1,6 +1,5 @@
 const { EOL } = require('os');
 const chalk = require('chalk');
-const log = console.log;
 
 /**
  * Function to get the line number and position of the error
@@ -25,7 +24,7 @@ const getErrorLineInfo = (content, position) => {
  */
 const printTitle = () => {
     const ANON_VALIDATOR = "ANON Validator";
-    log(chalk.bold.underline.cyanBright(`${EOL}${ANON_VALIDATOR}${EOL}`));
+    logger(chalk.bold.underline.cyanBright(`${EOL}${ANON_VALIDATOR}${EOL}`));
 }
 
 /**
@@ -34,10 +33,10 @@ const printTitle = () => {
  * @param {Object} errorInfo 
  */
 const output = (errorObject, errorInfo) => {
-    log(chalk.redBright(`${errorObject.type}: ${errorObject.message}`));
-    log(chalk.redBright(`Line: ${errorInfo.lineNumber}; Position: ${errorInfo.position}${EOL}`));
-    log(chalk.whiteBright(`--> ${errorInfo.line}${EOL}`));
-    errorObject.expected && log(chalk.greenBright(`Expected: '${errorObject.expected}'`));
+    logger(chalk.redBright(`${errorObject.type}: ${errorObject.message}`));
+    logger(chalk.redBright(`Line: ${errorInfo.lineNumber}; Position: ${errorInfo.position}${EOL}`));
+    logger(chalk.whiteBright(`--> ${errorInfo.line}${EOL}`));
+    errorObject.expected && logger(chalk.greenBright(`Expected: '${errorObject.expected}'`));
 }
 
 /**
@@ -58,7 +57,7 @@ const printError = error => {
     if (error.errorObject) {
         printErrorDetails(error);
     } else {
-        log(chalk.redBright(`${error.type}: ${error.message}`));
+        logger(chalk.redBright(`${error.type}: ${error.message}`));
     }
 }
 
@@ -68,7 +67,18 @@ const printError = error => {
  */
 const printSuccess = (message) => {
     printTitle();
-    log(chalk.greenBright(message));
+    logger(chalk.greenBright(message));
+}
+
+/**
+ * Function to log the message in command line
+ * @param {String} message 
+ */
+ const logger = (message) => {
+    //Check if test execution
+    if (process.env.NODE_ENV !== 'test') {
+        console.log(message);
+    }
 }
 
 module.exports = {
